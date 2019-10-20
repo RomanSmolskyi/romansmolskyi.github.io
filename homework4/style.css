@@ -2,7 +2,9 @@
     box-sizing: border-box;
     font-family: sans-serif;
   }
-  
+  html{
+    overflow-x: hidden;
+  }
   body { margin: 0 }
   
   h1, h2, h3, h4, h5, h6, p {
@@ -135,12 +137,19 @@
     margin-right: 10px;
     margin-top: 40px;
    }
+  .container-30{
+    width: 35%;
+  }
 
+  .container-70{
+    width: 65%
+  }
    .box2-img{
     height: 350px;
     margin-left: 160px;
     margin-bottom: 20px;
     margin-top: 30px;
+    
    }
 
    .box2-text{
@@ -171,8 +180,9 @@
    .box3{
      background:rgba(0, 128, 0, 0.219);
      width: 100%;
-     height: 370px;
+     height: 430px;
      margin-top: 100px;
+     padding-top: 30px;
    }
 
    .box3-text h3,p {
@@ -239,25 +249,23 @@
       height: 300px;
       width: 100%;
       margin-top: 100px;
-      text-align: center;
     }
 
+    .box6-email{
+      vertical-align: middle;
+      padding-left: 240px;
+    }
     .box6-img{
       height: 35px;
       margin-left: 350px;
-      margin-top: 45px;
+      margin-top: 75px;
    
     }
 
     .box6-text{
-      margin-top: 50px;
+      margin-top: 80px;
       color: grey;
       margin-left: 10px;
-    }
-
-    .box6-email {
-      margin-left: 400px;
-      margin-top: 20px;
     }
     
      .box6-search {
@@ -285,12 +293,17 @@
       text-align: center;
     }
 
+    .box7{
+      vertical-align: middle;
+    }
+
     .box7 h2{
       padding: 50px;
       padding-bottom: 0px ;
       text-decoration: underline;
       font-family: Arial
     }
+
 
     .img-box7{
       height: 55px;
@@ -314,19 +327,15 @@
       padding-left: 12px;
     }
 
-
-    .margin-l{
-      margin-left: 490px;
-      margin-top: 20px;
-    }
-
     .footer-menu{
       text-decoration: none;
       color: rgb(128, 128, 128);
       padding: 5px;
+      
     }
     .footer-margin{
-  margin-left: 440px;
-  margin-top: 50px;
-
+      margin-left: 450px;
+    }
+    .margin-l{
+      margin-left: 40px;
     }
