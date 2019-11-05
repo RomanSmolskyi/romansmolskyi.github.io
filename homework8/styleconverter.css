@@ -7,7 +7,7 @@ overflow-x: hidden;
 }
 body { 
     margin: 0 auto;
-    width: 1000px;
+    width: 500px;
 
 }
 
@@ -31,7 +31,6 @@ margin-bottom: 10px
 .section{
     border: solid 1px black;
     background-color: rgba(45, 197, 202, 0.808);
-    margin-left: 275px;
     margin-top: 30px;
     padding: 10px;
     height: 130px;
