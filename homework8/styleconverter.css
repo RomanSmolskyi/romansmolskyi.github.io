@@ -5,7 +5,11 @@ font-family: sans-serif;
 html{
 overflow-x: hidden;
 }
-body { margin: 0 }
+body { 
+    margin: 0 auto;
+    width: 1000px;
+
+}
 
 h1, h2, h3, h4, h5, h6, p {
 margin: 0;
@@ -27,11 +31,11 @@ margin-bottom: 10px
 .section{
     border: solid 1px black;
     background-color: rgba(45, 197, 202, 0.808);
-    width: 33%;
-    margin-left: 450px;
+    margin-left: 275px;
     margin-top: 30px;
     padding: 10px;
     height: 130px;
+    width: 450px;
 }
 
 .section img{
