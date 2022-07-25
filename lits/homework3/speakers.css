@@ -1,0 +1,16 @@
+header {
+    padding: 0px;
+    text-align: center;
+    background:  rgb(95, 32, 178);
+    margin: -10px;
+  }
+  .back {
+      background-color: aqua;
+  }
+  .back a{
+      color: black;
+      font-size: 130%;
+  }
+  .h1 {
+      background-color:  #333;
+  }
