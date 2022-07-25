@@ -1,0 +1,38 @@
+.dialog {
+  width: 320px;
+}
+
+.dialog-content {
+  padding: 12px !important;
+}
+
+.dialog-title {
+  height: 35px;
+  background-color: #f29b28;
+  padding: 5px 12px !important;
+  font-size: 1.2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon-container {
+  display: flex;
+}
+
+.close-icon {
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer;
+}
+
+.heading {
+  margin: 0 0 5px 0;;
+  color: #444;
+  font-weight: normal;
+}
+
+.todo-title {
+  color: #f29b28;
+}

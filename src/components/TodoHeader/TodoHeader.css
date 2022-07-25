@@ -1,0 +1,14 @@
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+}
+
+.todo-header h1 {
+  color: #f29b28;
+}
+
+.todo-header span {
+  color: steelblue;
+}

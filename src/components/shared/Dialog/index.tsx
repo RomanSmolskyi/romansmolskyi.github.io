@@ -1,0 +1,2 @@
+export { CustumDialog } from "./CustumDialog";
+

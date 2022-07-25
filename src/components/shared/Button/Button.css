@@ -1,0 +1,37 @@
+.primary-btn {
+  width: 95px;
+  height: 35px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #f29b28;
+  border-radius: 3px;
+  color: #fff;
+  box-shadow: 0 0 5px #f29b28;
+}
+
+.primary-btn:hover {
+  background-color: #e56e13;
+}
+
+.primary-btn:active {
+  background-color: #e56e1363;
+}
+
+.secondary-btn {
+  height: 28px;
+  border: 1px solid #cfd4d8;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.secondary-btn:hover {
+  border: 1px solid #f29b28;
+}
+
+.primary-btn:disabled {
+  background-color: #cfd4d8;
+  color: #ffffff;
+  box-shadow: none;
+}
