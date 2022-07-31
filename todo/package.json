@@ -1,5 +1,6 @@
 {
-  "name": "my-app",
+  "name": "todo",
+  "homepage": "https://romansmolskyi.github.io/todo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +26,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -52,6 +55,8 @@
     "@svgr/webpack": "^6.2.1",
     "eslint": "^7.31.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-react-app": "^7.0.1",
+    "gh-pages": "^4.0.0",
     "prettier": "2.3.2"
   },
   "overrides": {
