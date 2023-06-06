@@ -183,7 +183,7 @@ export const App = () => {
         <Input
           // ref={focusInput}
           isAutoFocus={true}
-          placeholder="Type here to add your task"
+          placeholder="Type here to add your task..."
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyPress}
