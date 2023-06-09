@@ -88,12 +88,6 @@ export const App = () => {
     setValue(newValue);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === "Enter") {
-      if (!!value) addTask();
-    }
-  };
-
   const deleteItem = (id: number) => {
     dispatch(removeTask(id));
   };
@@ -183,12 +177,10 @@ export const App = () => {
       />
       <form onSubmit={addTask} className="container-panel">
         <Input
-          // ref={focusInput}
           isAutoFocus={true}
           placeholder="Type here to add your task..."
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          // onKeyDown={handleKeyPress}
         />
         <Button
           placeholder="Add Task"
