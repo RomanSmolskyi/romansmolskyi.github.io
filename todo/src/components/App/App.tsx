@@ -4,24 +4,18 @@ import { Input, Button } from "../shared";
 import { TodoHeader } from "../TodoHeader";
 import { TodoList } from "../TodoList";
 import { FilterPanel } from "../FilterPanel";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@material-ui/core";
-import { useLogger, useSetLocalStorage } from "../../utils/customHooks";
+import { useSetLocalStorage } from "../../utils/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewTask,
   doImportant,
   doneTask,
-  editTask,
   removeTask,
   setTasks,
 } from "../../store/todo/todoSlice";
 import { IAppState } from "../../store/rootReducer";
-import { store } from "../../store/store";
+import { DialogWindow } from "../DialogWindow";
+import { toLocalDateStr } from "../../helpers";
 
 export interface ITodoData {
   label: string;
@@ -40,6 +34,11 @@ interface IToggle {
 }
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  const selectTodoData = (state: IAppState) => state.todos.todoData;
+  const todoData = useSelector(selectTodoData);
+
   const [value, setValue] = useState<string>("");
   const [toggle, setToggle] = useState<IToggle>({
     isToggleAll: true,
@@ -47,23 +46,15 @@ export const App = () => {
     isToggleActive: false,
   });
   const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [editValue, setEditValue] = useState("");
-  const [currentIdTaks, setCurrentIdTask] = useState(0);
+  const [currentIdTask, setCurrentIdTask] = useState(0);
   const [searchValue, setSearchValue] = useState("");
-
-  const selectTodoData = (state: IAppState) => state.todos.todoData;
-
-  const toLocalDateStr = `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
-  const dispatch = useDispatch();
-
-  const todoData = useSelector(selectTodoData);
 
   useEffect(() => {
     const todoTasksFromLocalStorage = JSON.parse(
       localStorage.getItem("todos") || "[]"
     );
     dispatch(setTasks(todoTasksFromLocalStorage));
-  }, []);
+  }, [dispatch]);
 
   useSetLocalStorage(todoData, "todos");
 
@@ -125,47 +116,34 @@ export const App = () => {
   };
 
   const selectedTodos = () => {
-    let data = [...todoData];
+    let copyTodoData = [...todoData];
 
     if (searchValue?.length) {
-      data = data.filter((el) =>
+      copyTodoData = copyTodoData.filter((el) =>
         el.label?.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
 
     if (toggle.isToggleDone) {
-      return data.filter((el: ITodoData) => {
+      return copyTodoData.filter((el: ITodoData) => {
         return el.done;
       });
     }
     if (toggle.isToggleActive) {
-      return data.filter((el: ITodoData) => {
+      return copyTodoData.filter((el: ITodoData) => {
         return !el.done;
       });
     }
-    if (toggle.isToggleAll) return data;
-    return data;
+    if (toggle.isToggleAll) return copyTodoData;
+
+    return copyTodoData;
   };
 
   const toggleDialog = () => setOpenEditDialog(!openEditDialog);
 
-  const handleConfirmEditDialog = (id: number) => {
-    if (editValue && editValue.trim() !== "") {
-      dispatch(editTask({ id, editValue, toLocalDateStr }));
-      setEditValue("");
-    }
-    toggleDialog();
-  };
-
   const handleEdit = (id: number) => {
     setCurrentIdTask(id);
     toggleDialog();
-  };
-
-  const handleEditOnEnter = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === "Enter") {
-      handleConfirmEditDialog(currentIdTaks);
-    }
   };
 
   return (
@@ -175,12 +153,13 @@ export const App = () => {
         doneTodos={todoData.filter((el) => el.done).length}
         checkToggle={toggle.isToggleAll}
       />
-      <form onSubmit={addTask} className="container-panel">
+      <form id="add-task" onSubmit={addTask} className="container-panel">
         <Input
           isAutoFocus={true}
           placeholder="Type here to add your task..."
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          name="addTask"
         />
         <Button
           placeholder="Add Task"
@@ -205,30 +184,11 @@ export const App = () => {
         toggleDone={toggleDone}
         handleEdit={handleEdit}
       />
-
-      <Dialog
-        open={openEditDialog}
-        onClose={toggleDialog}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Change the task name</DialogTitle>
-        <DialogContent>
-          <Input
-            placeholder="Enter new name"
-            value={editValue}
-            onChange={(e) => setEditValue(e.target.value)}
-            onKeyPress={(e) => handleEditOnEnter(e)}
-            isAutoFocus={true}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={toggleDialog} placeholder="Cancel" />
-          <Button
-            onClick={() => handleConfirmEditDialog(currentIdTaks)}
-            placeholder="Save changes"
-          />
-        </DialogActions>
-      </Dialog>
+      <DialogWindow
+        currentIdTask={currentIdTask}
+        openEditDialog={openEditDialog}
+        toggleDialog={toggleDialog}
+      />
     </div>
   );
 };

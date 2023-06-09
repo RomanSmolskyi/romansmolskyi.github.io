@@ -1,13 +1,12 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./Input.css";
 
-interface IInputProps {
+interface IInputProps extends React.HTMLProps<HTMLInputElement> {
   placeholder: string;
   value: any;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isAutoFocus?: boolean;
   onKeyDown?: (e: any) => void;
-  onKeyPress?: (e: any) => void;
 }
 
 export const Input = ({
@@ -16,7 +15,7 @@ export const Input = ({
   isAutoFocus,
   onChange,
   onKeyDown,
-  onKeyPress,
+  ...rest
 }: IInputProps): JSX.Element => {
   return (
     <input
@@ -27,7 +26,7 @@ export const Input = ({
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
-      onKeyPress={onKeyPress}
+      {...rest}
     />
   );
 };

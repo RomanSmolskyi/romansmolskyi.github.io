@@ -1,5 +1,5 @@
 import { ITodoData } from "./../../components/App/App";
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface ITodoState {
   todoData: ITodoData[] | [];
@@ -26,6 +26,7 @@ const todoSlice = createSlice({
         if (el.id === action.payload.id) {
           el.done = !el.done;
           el.dateDone = el.done ? action.payload.toLocalDateStr : null;
+          el.important = false;
         }
         return el;
       });

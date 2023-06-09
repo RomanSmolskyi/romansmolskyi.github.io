@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Button, Input } from "../shared";
 import "./FilterPanel.css";
 
@@ -35,6 +34,7 @@ export const FilterPanel = ({
         placeholder={"Search your task..."}
         value={searchValue}
         onChange={setSearchValue}
+        name="searchTask"
       />
     </div>
   );

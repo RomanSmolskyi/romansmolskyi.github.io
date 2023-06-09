@@ -67,10 +67,10 @@ export const TodoListItem = ({
           type="checkbox"
           className="check-box"
           onClick={toggleDone}
-          id="toggleDone"
+          id={`toggleDone-${label}`}
           defaultChecked={done}
         />
-        <label htmlFor="toggleDone"></label>
+        <label htmlFor={`toggleDone-${label}`}></label>
         <span
           className={classList()}
           title={label}
