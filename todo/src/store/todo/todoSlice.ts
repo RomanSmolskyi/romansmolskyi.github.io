@@ -49,23 +49,13 @@ const todoSlice = createSlice({
         return el;
       });
     },
-    // lastTodos(state: ITodoState) {
-    //   const savedTodos = JSON.parse(localStorage.getItem("todos") || "[]");
-    //   state.todoData = savedTodos;
-    // },
+    setTasks(state: ITodoState, action) {
+      state.todoData = action.payload;
+    }
   },
 });
 
-// setTodoData(
-//   todoData.map((el) => {
-//     if (el.id === id) {
-//       el.done = !el.done;
-//       el.dateDone = el.done ? toLocalDateStr : null;
-//     }
-//     return el;
-//   })
-// );
 
-export const { addNewTask, removeTask, doneTask, doImportant, editTask } =
+export const { addNewTask, removeTask, doneTask, doImportant, editTask, setTasks } =
   todoSlice.actions;
 export const todos = todoSlice.reducer;

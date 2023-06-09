@@ -8,9 +8,7 @@ export const useLogger = (value: any) => {
 
 export const useSetLocalStorage = (value: any, key: string) => {
   useEffect(() => {
+
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 };
-
-export const useGetLocalStorage = (key: string, defaultValue: any) =>
-  JSON.parse(localStorage.getItem(key) || defaultValue);

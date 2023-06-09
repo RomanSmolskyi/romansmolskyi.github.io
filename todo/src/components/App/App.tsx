@@ -11,7 +11,6 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import { useLogger, useSetLocalStorage } from "../../utils/customHooks";
-import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewTask,
@@ -19,8 +18,10 @@ import {
   doneTask,
   editTask,
   removeTask,
+  setTasks,
 } from "../../store/todo/todoSlice";
 import { IAppState } from "../../store/rootReducer";
+import { store } from "../../store/store";
 
 export interface ITodoData {
   label: string;
@@ -40,9 +41,6 @@ interface IToggle {
 
 export const App = () => {
   const [value, setValue] = useState<string>("");
-  // const [todoData, setTodoData] = useState<ITodoData[]>(
-  //   JSON.parse(localStorage.getItem("todos") || "[]")
-  // );
   const [toggle, setToggle] = useState<IToggle>({
     isToggleAll: true,
     isToggleDone: false,
@@ -60,17 +58,21 @@ export const App = () => {
 
   const todoData = useSelector(selectTodoData);
 
-  useSetLocalStorage(todoData, "todos");
-  console.log(JSON.parse(localStorage.getItem("todos") || "[]"));
+  useEffect(() => {
+    const todoTasksFromLocalStorage = JSON.parse(
+      localStorage.getItem("todos") || "[]"
+    );
+    dispatch(setTasks(todoTasksFromLocalStorage));
+  }, []);
 
-  // useSetLocalStorage(value, "inputValue");
+  useSetLocalStorage(todoData, "todos");
 
   const addTask = () => {
-    if (value && value.trim() !== "") {
+    if (value?.trim() !== "") {
       dispatch(
         addNewTask({
           label: value,
-          id: new Date().getTime(),
+          id: new Date().getTime() + ` ${value}`,
           important: false,
           done: false,
           dateOfCreation: toLocalDateStr,
@@ -179,14 +181,14 @@ export const App = () => {
         doneTodos={todoData.filter((el) => el.done).length}
         checkToggle={toggle.isToggleAll}
       />
-      <div className="container-panel">
+      <form onSubmit={addTask} className="container-panel">
         <Input
           // ref={focusInput}
           isAutoFocus={true}
           placeholder="Type here to add your task..."
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          onKeyDown={handleKeyPress}
+          // onKeyDown={handleKeyPress}
         />
         <Button
           placeholder="Add Task"
@@ -195,7 +197,7 @@ export const App = () => {
           className="add-btn"
           disabled={!(value && value.trim() !== "")}
         />
-      </div>
+      </form>
       <FilterPanel
         isToggle={toggle}
         filterAll={filterAll}
