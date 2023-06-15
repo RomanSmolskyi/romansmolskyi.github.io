@@ -5,6 +5,7 @@ import "./TodoListItem.css";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import PriorityHighRoundedIcon from "@material-ui/icons/PriorityHighRounded";
 import EditIcon from "@material-ui/icons/Edit";
+import InfoIcon from "@mui/icons-material/Info";
 import { CustumDialog } from "../shared/Dialog";
 
 interface ITodoListItem {
@@ -103,6 +104,11 @@ export const TodoListItem = ({
           <Button
             className="edit-btn"
             placeholder={<EditIcon fontSize="small" className="edit-icon" />}
+            onClick={handleEdit}
+          />
+          <Button
+            className="edit-btn"
+            placeholder={<InfoIcon color="warning" />}
             onClick={handleEdit}
           />
         </span>
